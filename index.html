@@ -6,156 +6,286 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
       margin: 0;
       padding: 0;
+      color: #e0f7ff;
       overflow-x: hidden;
-      color: #333;
+      font-size: 18px;
     }
 
     .overlay {
-      background: rgba(255,255,255,0.6);
       min-height: 100vh;
-    }
-
-    .wave {
-      position: fixed;
-      bottom: 0;
-      width: 200%;
-      height: 120px;
-      background: rgba(0, 150, 255, 0.3);
-      border-radius: 100%;
-      animation: waveMove 6s infinite linear;
-    }
-
-    .wave:nth-child(2) {
-      animation-duration: 10s;
-      opacity: 0.5;
-    }
-
-    @keyframes waveMove {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+      background: rgba(0,0,0,0.3);
     }
 
     header {
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      color: white;
       text-align: center;
-      padding: 25px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      color: #aeefff;
+      letter-spacing: 2px;
     }
 
-    .container { padding: 20px; }
+    h1 {
+      font-size: 2.8em;
+      text-shadow: 0 0 10px rgba(0,200,255,0.7);
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
 
     .card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.08);
       padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
       margin-bottom: 20px;
-      backdrop-filter: blur(5px);
-      transition: transform 0.3s;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .card:hover { transform: translateY(-5px); }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.7);
+    }
+
+    .card h2 {
+      color: #7fe7ff;
+      font-size: 1.6em;
+    }
+
+    .card p {
+      font-size: 1.2em;
+    }
+
+    .name-large {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(0,200,255,0.8);
+    }
 
     input {
       padding: 8px;
       font-size: 16px;
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      color: white;
     }
 
-    .card h2 { color: #0072ff; }
-    .icon { font-size: 24px; }
-  </style>
+    /* 星 */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+      z-index: -1;
+    }
+
+    .stars::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      box-shadow:
+        20px 30px white,
+        100px 150px white,
+        200px 80px white,
+        300px 200px white,
+        400px 120px white,
+        500px 250px white,
+        600px 90px white;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+    /* フェードインアニメーション */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* フェードインアニメーション */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 文字キラッ */
+  .sparkle {
+    position: relative;
+    display: inline-block;
+  }
+  .sparkle::after {
+    content: '✨';
+    position: absolute;
+    right: -20px;
+    top: 0;
+    opacity: 0;
+    animation: sparkleAnim 1s ease;
+  }
+  @keyframes sparkleAnim {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(0.5); }
+  }
+
+  /* グラデーション文字 */
+  .gradient-text {
+    background: linear-gradient(90deg, #7fe7ff, #ffffff, #7fe7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 3s infinite linear;
+  }
+  @keyframes gradientMove {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+
+  /* 星が増える演出 */
+  .extra-stars {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    animation: floatUp 1s ease forwards;
+  }
+  @keyframes floatUp {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+  }
+  /* 月 */
+  .moon {
+    position: fixed;
+    top: 60px;
+    right: 80px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ddd);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    animation: moonMove 20s linear infinite;
+  }
+
+  @keyframes moonMove {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-200px); }
+    100% { transform: translateX(0); }
+  }
+</style>
 </head>
 <body>
 
-  <!-- 波の音 -->
-  <audio id="bgm" autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
+<div class="stars"></div>
+<div class="moon"></div>
 
-  <div class="overlay">
-    <header>
-      <h1>🌊 はなの自己紹介ページ 🌴🍧</h1>
-    </header>
+<div class="overlay">
+  <header>
+    <h1>🌙 はなの自己紹介 🌊</h1>
+  </header>
 
-    <div class="container">
-      <div class="card">
-        <h2>名前 <span class="icon">🌸</span></h2>
-        <p>はな</p>
-      </div>
+  <div class="container">
 
-      <div class="card">
-        <h2>誕生日 <span class="icon">🎂</span></h2>
-        <input type="date" id="birthday" value="2009-07-17">
-        <p id="age"></p>
-        <p id="zodiac"></p>
-        <p id="birthdayMessage"></p>
-      </div>
-
-      <div class="card">
-        <h2>好きなこと <span class="icon">🍦</span></h2>
-        <p>サックスを吹くこと</p>
-      </div>
-
-      <div class="card">
-        <h2>趣味 <span class="icon">🌴</span></h2>
-        <p>絵を描くこと</p>
-      </div>
-
-      
+    <div class="card">
+      <h2>名前</h2>
+      <p class="name-large">はな</p>
     </div>
+
+    <div class="card">
+      <h2>誕生日</h2>
+      <input type="date" id="birthday" value="2009-07-17">
+      <p id="age"></p>
+      <p id="zodiac"></p>
+      <p id="birthdayMessage"></p>
+    </div>
+
+    <div class="card">
+      <h2>好きなこと</h2>
+      <p>サックスを吹くこと 🎷</p>
+    </div>
+
+    <div class="card">
+      <h2>趣味</h2>
+      <p>絵を描くこと 🎨</p>
+    </div>
+
   </div>
+</div>
 
-  <div class="wave"></div>
-  <div class="wave"></div>
+<script>
+  const birthdayInput = document.getElementById('birthday');
+  const ageText = document.getElementById('age');
+  const zodiacText = document.getElementById('zodiac');
+  const messageText = document.getElementById('birthdayMessage');
 
-  <script>
-    const birthdayInput = document.getElementById('birthday');
-    const ageText = document.getElementById('age');
-    const zodiacText = document.getElementById('zodiac');
-    const messageText = document.getElementById('birthdayMessage');
+  function updateInfo() {
+    const birthDate = new Date(birthdayInput.value);
+    const today = new Date();
 
-    birthdayInput.addEventListener('change', () => {
-      const birthDate = new Date(birthdayInput.value);
-      const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    ageText.textContent = `年齢：${age}歳`;
 
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      ageText.textContent = `年齢：${age}歳`;
+    const month = birthDate.getMonth() + 1;
+    const day = birthDate.getDate();
 
-      const month = birthDate.getMonth() + 1;
-      const day = birthDate.getDate();
+    let zodiac = '';
+    if ((month==3 && day>=21)||(month==4 && day<=19)) zodiac='おひつじ座';
+    else if ((month==4 && day>=20)||(month==5 && day<=20)) zodiac='おうし座';
+    else if ((month==5 && day>=21)||(month==6 && day<=21)) zodiac='ふたご座';
+    else if ((month==6 && day>=22)||(month==7 && day<=22)) zodiac='かに座';
+    else if ((month==7 && day>=23)||(month==8 && day<=22)) zodiac='しし座';
+    else if ((month==8 && day>=23)||(month==9 && day<=22)) zodiac='おとめ座';
+    else if ((month==9 && day>=23)||(month==10 && day<=23)) zodiac='てんびん座';
+    else if ((month==10 && day>=24)||(month==11 && day<=22)) zodiac='さそり座';
+    else if ((month==11 && day>=23)||(month==12 && day<=21)) zodiac='いて座';
+    else if ((month==12 && day>=22)||(month==1 && day<=19)) zodiac='やぎ座';
+    else if ((month==1 && day>=20)||(month==2 && day<=18)) zodiac='みずがめ座';
+    else if ((month==2 && day>=19)||(month==3 && day<=20)) zodiac='うお座';
 
-      let zodiac = '';
-      if ((month==3 && day>=21)||(month==4 && day<=19)) zodiac='おひつじ座';
-      else if ((month==4 && day>=20)||(month==5 && day<=20)) zodiac='おうし座';
-      else if ((month==5 && day>=21)||(month==6 && day<=21)) zodiac='ふたご座';
-      else if ((month==6 && day>=22)||(month==7 && day<=22)) zodiac='かに座';
-      else if ((month==7 && day>=23)||(month==8 && day<=22)) zodiac='しし座';
-      else if ((month==8 && day>=23)||(month==9 && day<=22)) zodiac='おとめ座';
-      else if ((month==9 && day>=23)||(month==10 && day<=23)) zodiac='てんびん座';
-      else if ((month==10 && day>=24)||(month==11 && day<=22)) zodiac='さそり座';
-      else if ((month==11 && day>=23)||(month==12 && day<=21)) zodiac='いて座';
-      else if ((month==12 && day>=22)||(month==1 && day<=19)) zodiac='やぎ座';
-      else if ((month==1 && day>=20)||(month==2 && day<=18)) zodiac='みずがめ座';
-      else if ((month==2 && day>=19)||(month==3 && day<=20)) zodiac='うお座';
+    zodiacText.classList.remove('fade-in','sparkle','gradient-text');
+    void zodiacText.offsetWidth;
+    zodiacText.textContent = `🌙 あなたの星座は… ${zodiac} ✨`;
+    zodiacText.classList.add('fade-in','sparkle','gradient-text');
 
-      zodiacText.textContent = `星座：${zodiac}`;
+    // 星がふわっと出る
+    const star = document.createElement('div');
+    star.textContent = '⭐';
+    star.className = 'extra-stars';
+    star.style.left = Math.random()*80 + '%';
+    star.style.top = '60%';
+    document.body.appendChild(star);
+    setTimeout(()=> star.remove(),1000);
 
-      if (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate()) {
-        messageText.textContent = '🎉 お誕生日おめでとう！！ 🎉';
-      } else {
-        messageText.textContent = '';
-      }
-    });
-  </script>
+    if (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate()) {
+      messageText.textContent = '🎉 お誕生日おめでとう！！ 🎉';
+    } else {
+      messageText.textContent = '';
+    }
+  }
+
+  birthdayInput.addEventListener('change', updateInfo);
+  updateInfo();
+</script>
+
 </body>
 </html>
