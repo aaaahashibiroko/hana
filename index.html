@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>はなの自己紹介</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: #333;
+    }
 
+    .overlay {
+      background: rgba(255,255,255,0.6);
+      min-height: 100vh;
+    }
+
+    .wave {
+      position: fixed;
+      bottom: 0;
+      width: 200%;
+      height: 120px;
+      background: rgba(0, 150, 255, 0.3);
+      border-radius: 100%;
+      animation: waveMove 6s infinite linear;
+    }
+
+    .wave:nth-child(2) {
+      animation-duration: 10s;
+      opacity: 0.5;
+    }
+
+    @keyframes waveMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    header {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      text-align: center;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .container { padding: 20px; }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s;
+    }
+
+    .card:hover { transform: translateY(-5px); }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .card h2 { color: #0072ff; }
+    .icon { font-size: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- 波の音 -->
+  <audio id="bgm" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="overlay">
+    <header>
+      <h1>🌊 はなの自己紹介ページ 🌴🍧</h1>
+    </header>
+
+    <div class="container">
+      <div class="card">
+        <h2>名前 <span class="icon">🌸</span></h2>
+        <p>はな</p>
+      </div>
+
+      <div class="card">
+        <h2>誕生日 <span class="icon">🎂</span></h2>
+        <input type="date" id="birthday" value="2009-07-17">
+        <p id="age"></p>
+        <p id="zodiac"></p>
+        <p id="birthdayMessage"></p>
+      </div>
+
+      <div class="card">
+        <h2>好きなこと <span class="icon">🍦</span></h2>
+        <p>サックスを吹くこと</p>
+      </div>
+
+      <div class="card">
+        <h2>趣味 <span class="icon">🌴</span></h2>
+        <p>絵を描くこと</p>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div class="wave"></div>
+  <div class="wave"></div>
+
+  <script>
+    const birthdayInput = document.getElementById('birthday');
+    const ageText = document.getElementById('age');
+    const zodiacText = document.getElementById('zodiac');
+    const messageText = document.getElementById('birthdayMessage');
+
+    birthdayInput.addEventListener('change', () => {
+      const birthDate = new Date(birthdayInput.value);
+      const today = new Date();
+
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      ageText.textContent = `年齢：${age}歳`;
+
+      const month = birthDate.getMonth() + 1;
+      const day = birthDate.getDate();
+
+      let zodiac = '';
+      if ((month==3 && day>=21)||(month==4 && day<=19)) zodiac='おひつじ座';
+      else if ((month==4 && day>=20)||(month==5 && day<=20)) zodiac='おうし座';
+      else if ((month==5 && day>=21)||(month==6 && day<=21)) zodiac='ふたご座';
+      else if ((month==6 && day>=22)||(month==7 && day<=22)) zodiac='かに座';
+      else if ((month==7 && day>=23)||(month==8 && day<=22)) zodiac='しし座';
+      else if ((month==8 && day>=23)||(month==9 && day<=22)) zodiac='おとめ座';
+      else if ((month==9 && day>=23)||(month==10 && day<=23)) zodiac='てんびん座';
+      else if ((month==10 && day>=24)||(month==11 && day<=22)) zodiac='さそり座';
+      else if ((month==11 && day>=23)||(month==12 && day<=21)) zodiac='いて座';
+      else if ((month==12 && day>=22)||(month==1 && day<=19)) zodiac='やぎ座';
+      else if ((month==1 && day>=20)||(month==2 && day<=18)) zodiac='みずがめ座';
+      else if ((month==2 && day>=19)||(month==3 && day<=20)) zodiac='うお座';
+
+      zodiacText.textContent = `星座：${zodiac}`;
+
+      if (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate()) {
+        messageText.textContent = '🎉 お誕生日おめでとう！！ 🎉';
+      } else {
+        messageText.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
