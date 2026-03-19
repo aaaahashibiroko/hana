@@ -6,7 +6,8 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(rgba(0,0,20,0.6), rgba(0,0,40,0.9)),
+                  url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center/cover;
       margin: 0;
       padding: 0;
       color: #e0f7ff;
@@ -14,21 +15,15 @@
       font-size: 18px;
     }
 
-    .overlay {
-      min-height: 100vh;
-      background: rgba(0,0,0,0.3);
-    }
-
     header {
       text-align: center;
       padding: 30px;
       color: #aeefff;
-      letter-spacing: 2px;
     }
 
     h1 {
       font-size: 2.8em;
-      text-shadow: 0 0 10px rgba(0,200,255,0.7);
+      text-shadow: 0 0 15px rgba(0,200,255,0.8);
     }
 
     .container {
@@ -38,34 +33,16 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255,255,255,0.08);
       padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
       margin-bottom: 20px;
       backdrop-filter: blur(10px);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.7);
-    }
-
-    .card h2 {
-      color: #7fe7ff;
-      font-size: 1.6em;
-    }
-
-    .card p {
-      font-size: 1.2em;
     }
 
     .name-large {
       font-size: 2.2em;
       font-weight: bold;
-      color: #ffffff;
-      text-shadow: 0 0 8px rgba(0,200,255,0.8);
     }
 
     input {
@@ -77,14 +54,13 @@
       color: white;
     }
 
-    /* 星 */
+    /* 星いっぱい */
     .stars {
       position: fixed;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      background: transparent;
       z-index: -1;
     }
 
@@ -95,13 +71,11 @@
       height: 2px;
       background: white;
       box-shadow:
-        20px 30px white,
-        100px 150px white,
-        200px 80px white,
-        300px 200px white,
-        400px 120px white,
-        500px 250px white,
-        600px 90px white;
+        20px 30px white, 50px 80px white, 100px 150px white,
+        150px 200px white, 200px 80px white, 250px 120px white,
+        300px 200px white, 350px 50px white, 400px 120px white,
+        450px 180px white, 500px 250px white, 550px 100px white,
+        600px 90px white, 650px 160px white, 700px 60px white;
       animation: twinkle 2s infinite alternate;
     }
 
@@ -109,133 +83,81 @@
       from { opacity: 0.3; }
       to { opacity: 1; }
     }
-    /* フェードインアニメーション */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(8px);
-    animation: fadeInUp 0.6s ease forwards;
-  }
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  /* フェードインアニメーション */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(8px);
-    animation: fadeInUp 0.6s ease forwards;
-  }
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
 
-  /* 文字キラッ */
-  .sparkle {
-    position: relative;
-    display: inline-block;
-  }
-  .sparkle::after {
-    content: '✨';
-    position: absolute;
-    right: -20px;
-    top: 0;
-    opacity: 0;
-    animation: sparkleAnim 1s ease;
-  }
-  @keyframes sparkleAnim {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(0.5); }
-  }
+    /* 月 */
+    .moon {
+      position: fixed;
+      top: 60px;
+      right: 80px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+      animation: moonMove 20s linear infinite;
+    }
 
-  /* グラデーション文字 */
-  .gradient-text {
-    background: linear-gradient(90deg, #7fe7ff, #ffffff, #7fe7ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 3s infinite linear;
-  }
-  @keyframes gradientMove {
-    0% { background-position: 0%; }
-    100% { background-position: 200%; }
-  }
+    @keyframes moonMove {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-200px); }
+      100% { transform: translateX(0); }
+    }
 
-  /* 星が増える演出 */
-  .extra-stars {
-    position: absolute;
-    color: white;
-    font-size: 14px;
-    animation: floatUp 1s ease forwards;
-  }
-  @keyframes floatUp {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(-20px); }
-  }
-  /* 月 */
-  .moon {
-    position: fixed;
-    top: 60px;
-    right: 80px;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle at 30% 30%, #fff, #ddd);
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255,255,255,0.8);
-    animation: moonMove 20s linear infinite;
-  }
+    .fade-in {
+      animation: fadeIn 0.6s ease;
+    }
 
-  @keyframes moonMove {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(-200px); }
-    100% { transform: translateX(0); }
-  }
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
 </head>
 <body>
 
 <div class="stars"></div>
 <div class="moon"></div>
 
-<div class="overlay">
-  <header>
-    <h1>🌙 はなの自己紹介 🌊</h1>
-  </header>
+<header>
+  <h1>🌙 はなの自己紹介 🌊</h1>
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
-      <h2>名前</h2>
-      <p class="name-large">はな</p>
-    </div>
-
-    <div class="card">
-      <h2>誕生日</h2>
-      <input type="date" id="birthday" value="2009-07-17">
-      <p id="age"></p>
-      <p id="zodiac"></p>
-      <p id="birthdayMessage"></p>
-    </div>
-
-    <div class="card">
-      <h2>好きなこと</h2>
-      <p>サックスを吹くこと 🎷</p>
-    </div>
-
-    <div class="card">
-      <h2>趣味</h2>
-      <p>絵を描くこと 🎨</p>
-    </div>
-
+  <div class="card">
+    <h2>名前</h2>
+    <p class="name-large">はな</p>
   </div>
+
+  <div class="card">
+    <h2>誕生日</h2>
+    <input type="date" id="birthday" value="2009-07-17">
+    <p id="age"></p>
+    <p id="zodiac"></p>
+  </div>
+
+  <div class="card">
+    <h2>好きなこと</h2>
+    <p>サックスを吹くこと 🎷</p>
+  </div>
+
+  <div class="card">
+    <h2>趣味</h2>
+    <p>絵を描くこと 🎨</p>
+  </div>
+
 </div>
 
 <script>
   const birthdayInput = document.getElementById('birthday');
   const ageText = document.getElementById('age');
   const zodiacText = document.getElementById('zodiac');
-  const messageText = document.getElementById('birthdayMessage');
 
   function updateInfo() {
     const birthDate = new Date(birthdayInput.value);
+    if (!birthdayInput.value) return;
+
     const today = new Date();
 
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -243,6 +165,7 @@
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
+
     ageText.textContent = `年齢：${age}歳`;
 
     const month = birthDate.getMonth() + 1;
@@ -262,29 +185,12 @@
     else if ((month==1 && day>=20)||(month==2 && day<=18)) zodiac='みずがめ座';
     else if ((month==2 && day>=19)||(month==3 && day<=20)) zodiac='うお座';
 
-    zodiacText.classList.remove('fade-in','sparkle','gradient-text');
-    void zodiacText.offsetWidth;
     zodiacText.textContent = `🌙 あなたの星座は… ${zodiac} ✨`;
-    zodiacText.classList.add('fade-in','sparkle','gradient-text');
-
-    // 星がふわっと出る
-    const star = document.createElement('div');
-    star.textContent = '⭐';
-    star.className = 'extra-stars';
-    star.style.left = Math.random()*80 + '%';
-    star.style.top = '60%';
-    document.body.appendChild(star);
-    setTimeout(()=> star.remove(),1000);
-
-    if (today.getMonth() === birthDate.getMonth() && today.getDate() === birthDate.getDate()) {
-      messageText.textContent = '🎉 お誕生日おめでとう！！ 🎉';
-    } else {
-      messageText.textContent = '';
-    }
+    zodiacText.classList.add('fade-in');
   }
 
   birthdayInput.addEventListener('change', updateInfo);
-  updateInfo();
+  window.addEventListener('load', updateInfo);
 </script>
 
 </body>
